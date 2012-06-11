@@ -4,10 +4,10 @@
   #(and (<= 0 %) (< % (count board))))
 
 (defn mine? [space]
-  (= \* space))
+  (= '* space))
 
 (defn create-analyzer [board counter]
-  #(if (mine? (get board %))
+  #(if (mine? (nth board %))
     \*
     (counter %)))
 
@@ -16,10 +16,10 @@
    (if (or
          (and
            (validator (dec space))
-           (mine? (get board (dec space))))
+           (mine? (nth board (dec space))))
          (and
            (validator (inc space))
-           (mine? (get board (inc space)))))
+           (mine? (nth board (inc space)))))
     1
     0)))
 
