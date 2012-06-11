@@ -8,7 +8,7 @@
 
 (defn create-analyzer [board counter]
   #(if (mine? (nth board %))
-    \*
+    '*
     (counter %)))
 
 (defn create-neighbor-counter [board validator]
@@ -27,5 +27,4 @@
   (let [validator (create-validator board)
         counter (create-neighbor-counter board validator)
         analyzer (create-analyzer board counter)]
-  (apply str 
-    (map analyzer (range 0 (count board))))))
+    (map analyzer (range 0 (count board)))))

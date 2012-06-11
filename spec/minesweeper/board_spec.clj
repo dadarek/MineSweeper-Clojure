@@ -5,21 +5,25 @@
 (describe "Board"
   (context "1x1 field"
     (it "Finds no mines"
-      (should= "0" (find-mines '(.))))
+      (should= '(0) (find-mines '(.))))
 
     (it "Finds one mine"
-      (should= "*" (find-mines '(*)))))
+      (should= '(*) (find-mines '(*)))))
 
   (context "2x1 field"
     (it "Finds no mines"
-      (should= "00" (find-mines '(. .))))
+      (should= '(0 0) (find-mines '(. .))))
 
     (it "Finds all mines"
-      (should= "**" (find-mines '(* *))))
+      (should= '(* *) (find-mines '(* *))))
 
     (it "Finds left mine"
-      (should= "*1" (find-mines '(* .))))
+      (should= '(* 1) (find-mines '(* .))))
 
     (it "Finds right mine"
-      (should= "1*" (find-mines '(. *)))))
+      (should= '(1 *) (find-mines '(. *)))))
+
+  (context "3x1 field"
+    (it "Finds no mines"
+      (should= '(0 0 0) (find-mines '(. . .)))))
 )
