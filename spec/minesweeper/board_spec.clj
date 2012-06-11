@@ -18,6 +18,8 @@
       (should= "**" (find-mines "**")))
 
     (it "Finds left mine"
-      (should= "*1" (find-mines "*."))))
-)
+      (should= "*1" (find-mines "*.")))
 
+    (it "Finds right mine"
+      (should= "1*" (find-mines ".*"))))
+)
