@@ -25,5 +25,18 @@
 
   (context "3x1 field"
     (it "Finds no mines"
-      (should= '(0 0 0) (find-mines '(. . .)))))
+      (should= '(0 0 0) (find-mines '(. . .))))
+
+    (it "finds 1 mine"
+      (should= '(* 1 0) (find-mines '(* . .)))
+      (should= '(1 * 1) (find-mines '(. * .)))
+      (should= '(0 1 *) (find-mines '(. . *))))
+
+    (it "finds 2 mines"
+      (should= '(1 * *) (find-mines '(. * *)))
+      (should= '(* 2 *) (find-mines '(* . *)))
+      (should= '(* * 1) (find-mines '(* * .))))
+
+    (it "finds all mines"
+      (should= '(* * *) (find-mines '(* * *)))))
 )

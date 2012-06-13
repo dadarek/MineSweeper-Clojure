@@ -1,5 +1,8 @@
 (ns minesweeper.board)
 
+(defn count-trues [values]
+  (count (filter #(= % true) values)))
+
 (defn create-validator [board]
   #(and (<= 0 %) (< % (count board))))
 
@@ -13,15 +16,12 @@
 
 (defn create-neighbor-counter [board validator]
   (fn [space]
-   (if (or
-         (and
-           (validator (dec space))
-           (mine? (nth board (dec space))))
-         (and
-           (validator (inc space))
-           (mine? (nth board (inc space)))))
-    1
-    0)))
+    (count-trues
+      (map #(and
+             (validator %)
+             (mine? (nth board %)))
+           [(dec space) (inc space)]))))
+
 
 (defn find-mines [board] 
   (let [validator (create-validator board)
