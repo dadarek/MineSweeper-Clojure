@@ -89,4 +89,19 @@
                        (. . .))]
         (should=  expected (find-mines field)))))
 
+  (context "a really big field"
+    (it "works on these also"
+      (let [expected '((* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1)
+                       (2 4 2 4 2 4 2 4 2 4 2 4 2 4 2 2)
+                       (* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1)
+                       (1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 1)
+                       (0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+
+            field    '((* . * . * . * . * . * . * . * .)
+                       (. . . . . . . . . . . . . . . .)
+                       (* . * . * . * . * . * . * . * .)
+                       (. . . . . . . . . . . . . . . .)
+                       (. . . . . . . . . . . . . . . .))]
+        (should=  expected (find-mines field)))))
+
 )
