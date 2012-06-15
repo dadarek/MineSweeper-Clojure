@@ -2,41 +2,65 @@
   (:use [minesweeper.board :only [find-mines] ]
         [speclj.core]))
 
-(describe "Board"
+(describe "find-mines"
   (context "1x1 field"
-    (it "Finds no mines"
-      (should= '(0) (find-mines '(.))))
+    (it "finds no mines"
+      (let [expected '((0))
+            field    '((.))]
+        (should=  expected (find-mines field))))
 
-    (it "Finds one mine"
-      (should= '(*) (find-mines '(*)))))
+    (it "finds one mine"
+      (let [expected '((*))
+            field    '((*))]
+        (should=  expected (find-mines field)))))
 
-  (context "2x1 field"
-    (it "Finds no mines"
-      (should= '(0 0) (find-mines '(. .))))
-
-    (it "Finds all mines"
-      (should= '(* *) (find-mines '(* *))))
-
-    (it "Finds left mine"
-      (should= '(* 1) (find-mines '(* .))))
-
-    (it "Finds right mine"
-      (should= '(1 *) (find-mines '(. *)))))
-
-  (context "3x1 field"
-    (it "Finds no mines"
-      (should= '(0 0 0) (find-mines '(. . .))))
-
-    (it "finds 1 mine"
-      (should= '(* 1 0) (find-mines '(* . .)))
-      (should= '(1 * 1) (find-mines '(. * .)))
-      (should= '(0 1 *) (find-mines '(. . *))))
-
-    (it "finds 2 mines"
-      (should= '(1 * *) (find-mines '(. * *)))
-      (should= '(* 2 *) (find-mines '(* . *)))
-      (should= '(* * 1) (find-mines '(* * .))))
+  (context "1x2 field"
+    (it "finds no mines"
+      (let [expected '((0 0))
+            field    '((. .))]
+        (should=  expected (find-mines field))))
 
     (it "finds all mines"
-      (should= '(* * *) (find-mines '(* * *)))))
+      (let [expected '((* *))
+            field    '((* *))]
+        (should=  expected (find-mines field))))
+
+    (it "finds left mine"
+      (let [expected '((1 *))
+            field    '((. *))]
+        (should=  expected (find-mines field))))
+
+    (it "finds right mine"
+      (let [expected '((* 1))
+            field    '((* .))]
+        (should=  expected (find-mines field)))))
+
+  (context "2x1 field"
+    (it "finds no mines"
+      (let [expected '((0)
+                       (0))
+            field    '((.)
+                       (.))]
+        (should=  expected (find-mines field))))
+
+    (it "finds all mines"
+      (let [expected '((*)
+                       (*))
+            field    '((*)
+                       (*))]
+        (should=  expected (find-mines field))))
+
+    (it "finds top mine"
+      (let [expected '((*)
+                       (1))
+            field    '((*)
+                       (.))]
+        (should=  expected (find-mines field))))
+
+    (it "finds bottom mine"
+      (let [expected '((1)
+                       (*))
+            field    '((.)
+                       (*))]
+        (should=  expected (find-mines field)))))
 )
