@@ -63,4 +63,30 @@
             field    '((.)
                        (*))]
         (should=  expected (find-mines field)))))
+
+  (context "1x3 field"
+    (it "finds multiple mines"
+      (let [expected '((* 2 *))
+            field    '((* . *))]
+        (should=  expected (find-mines field)))))
+
+  (context "3x3 field"
+    (it "finds corner mines"
+      (let [expected '((* 2 *)
+                       (2 4 2)
+                       (* 2 *))
+            field    '((* . *)
+                       (. . .)
+                       (* . *))]
+        (should=  expected (find-mines field))))
+
+    (it "really finds corner mines"
+      (let [expected '((1 1 1)
+                       (1 * 1)
+                       (1 1 1))
+            field    '((. . .)
+                       (. * .)
+                       (. . .))]
+        (should=  expected (find-mines field)))))
+
 )
